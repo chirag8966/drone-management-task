@@ -14,7 +14,7 @@ export class GoogleMapComponent {
   ];
   zoom: number = 16;
   mapOptions: google.maps.MapOptions = {
-    mapTypeId: 'roadmap',
+    mapTypeId: 'hybrid',
     zoomControl: true,
     scrollwheel: true,
     scaleControl: true,
