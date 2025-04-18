@@ -13,7 +13,6 @@ export const appRoutes: Routes = [
             { path: 'management/inventory', loadComponent: () => import('./app/pages/management/inventory/inventory.component').then(m => m.InventoryComponent) },
             { path: 'management/field', loadComponent: () => import('./app/pages/management/field/field.component').then(m => m.FieldComponent) },
             { path: 'management/field:id', loadComponent: () => import('./app/pages/management/field/field.component').then(m => m.FieldComponent) },
-            { path: 'crud', loadComponent: () => import('./app/pages/crud/crud').then(m => m.Crud) },
             { path: 'empty', loadComponent: () => import('./app/pages/empty/empty').then(m => m.Empty) },
             { path: 'reports', loadChildren: () => import('./app/pages/reports/reports.routes') },
         ]

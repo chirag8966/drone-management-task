@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  syncfusionLicense: 'ORg4AjUWIQA/Gnt2XFhhQlJHfVpdXGtWfFN0QHNYflRwcl9CZUwgOX1dQl9mSXpSfkRiWH5feH1XQ2ZXU00='
+  syncfusionLicense: 'ORg4AjUWIQA/Gnt2XFhhQlJHfVpdXGtWfFN0QHNYflRwcl9CZUwgOX1dQl9mSXpSfkRiWH5feH1XQ2ZXU00=',
+  apiAddress: 'http://localhost:3000'
 };

@@ -1,17 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-
-/**
- * Interface for stats widget data
- */
-export interface StatWidget {
-    name: string;
-    count: string | number;
-    icon: string;
-    color: string;
-    highlight: string;
-    description: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { StatsService, StatWidget } from '../../../../services/stats.service';
 
 @Component({
     standalone: true,
@@ -20,8 +9,11 @@ export interface StatWidget {
     templateUrl: 'statswidget.component.html',
     styleUrls: ['statswidget.component.scss']
 })
-export class StatsWidget {
-    statsWidgets: StatWidget[] = [
+export class StatsWidget implements OnInit {
+    statsWidgets: StatWidget[] = [];
+    
+    // Default fallback data in case API fails
+    private defaultStatsWidgets: StatWidget[] = [
         {
             name: 'Total Drones',
             count: 350,
@@ -55,4 +47,45 @@ export class StatsWidget {
             description: 'Critical'
         }
     ];
+
+    constructor(private statsService: StatsService) {}
+
+    ngOnInit(): void {
+        this.loadStats();
+    }
+
+    /**
+     * Load stats data from the API
+     * Will use fallback data if API call fails
+     */
+    loadStats(): void {
+        this.statsService.getStats().subscribe({
+            next: (data) => {
+                if (data && data.length > 0) {
+                    // Map API data to statsWidgets, preserving icon and color from defaults
+                    this.statsWidgets = data.map(item => {
+                        // Find matching default item to get icon and color
+                        const defaultItem = this.defaultStatsWidgets.find(
+                            def => def.name.toLowerCase() === item.name.toLowerCase()
+                        );
+                        
+                        return {
+                            ...item,
+                            // Use API data but fallback to default values for icon and color
+                            icon: item.icon || (defaultItem ? defaultItem.icon : 'pi pi-question'),
+                            color: item.color || (defaultItem ? defaultItem.color : 'blue')
+                        };
+                    });
+                } else {
+                    // If no data or empty array, use defaults
+                    this.statsWidgets = [...this.defaultStatsWidgets];
+                }
+            },
+            error: (err) => {
+                console.error('Error fetching stats data:', err);
+                // Use default data on error
+                this.statsWidgets = [...this.defaultStatsWidgets];
+            }
+        });
+    }
 }

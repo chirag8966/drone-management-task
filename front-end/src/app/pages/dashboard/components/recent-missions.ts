@@ -3,7 +3,6 @@ import { RippleModule } from 'primeng/ripple';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { Product, ProductService } from '../../service/product.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -37,19 +36,35 @@ import { Router } from '@angular/router';
             </ng-template>
         </p-table>
     </div>`,
-    providers: [ProductService]
 })
 export class RecentMissions {
-    products!: Product[];
+    products: {id: string, name: string, location: string, price: number}[] = [];
     router = inject(Router)
 
-    constructor(private productService: ProductService) {}
-
     ngOnInit() {
-        this.productService.getProductsSmall().then((data) => (this.products = data));
+        this.products = [
+            {
+                id: '1',
+                name: 'Field 1',
+                location: 'Location 1',
+                price: 100
+            },
+            {
+                id: '2',
+                name: 'Field 2',
+                location: 'Location 2',
+                price: 200
+            },
+            {
+                id: '3',
+                name: 'Field 3',
+                location: 'Location 3',
+                price: 300
+            }
+        ];
     }
 
-    navigateToField(product: Product) {
+    navigateToField(product: {id: string, name: string, location: string, price: number}) {
         this.router.navigate(['/management/field'], {
             queryParams: { id: product.id }
         });

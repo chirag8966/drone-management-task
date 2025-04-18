@@ -18,7 +18,9 @@ export class StatsService {
   }
 
   async findAll() {
-    return await this.statsRepository.find();
+    return await this.statsRepository.find({
+      order: { id: 'ASC' }
+    });
   }
 
   async findOne(id: number) {
