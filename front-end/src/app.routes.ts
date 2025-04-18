@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { AppLayout } from './app/layout/component/app-layout/app.layout';
-import { Dashboard } from './app/pages/dashboard/dashboard';
-import { Documentation } from './app/pages/documentation/documentation';
 import { Notfound } from './app/pages/notfound/notfound';
 
 export const appRoutes: Routes = [
@@ -9,12 +7,15 @@ export const appRoutes: Routes = [
         path: '',
         component: AppLayout,
         children: [
-            { path: '', component: Dashboard },
-            { path: 'documentation', component: Documentation },
-            { path: 'planning', loadChildren: () => import('./app/pages/pages.routes') }
+            { path: '', loadComponent: () => import('./app/pages/dashboard/dashboard').then(m => m.Dashboard) },
+            { path: 'documentation', loadComponent: () => import('./app/pages/documentation/documentation').then(m => m.Documentation) },
+            { path: 'planning', loadChildren: () => import('./app/pages/pages.routes') },
+            { path: 'management/inventory', loadComponent: () => import('./app/pages/management/inventory/inventory.component').then(m => m.InventoryComponent) },
+            { path: 'crud', loadComponent: () => import('./app/pages/crud/crud').then(m => m.Crud) },
+            { path: 'empty', loadComponent: () => import('./app/pages/empty/empty').then(m => m.Empty) },
+            { path: 'reports', loadChildren: () => import('./app/pages/reports/reports.routes') },
         ]
     },
     { path: 'notfound', component: Notfound },
-    { path: 'auth', loadChildren: () => import('./app/pages/auth/auth.routes') },
     { path: '**', redirectTo: '/notfound' }
 ];

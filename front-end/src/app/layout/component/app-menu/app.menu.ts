@@ -27,12 +27,12 @@ export class AppMenu {
                     {
                         label: 'Missions',
                         icon: 'pi pi-fw pi-map',
-                        routerLink: ['/planning/empty']
+                        routerLink: ['/planning/missions']
                     },
                     {
                         label: 'Schedule',
                         icon: 'pi pi-fw pi-calendar-plus',
-                        routerLink: ['/planning/empty']
+                        routerLink: ['/planning/schedule']
                     },
                 ]
             },
@@ -44,7 +44,7 @@ export class AppMenu {
                     {
                         label: 'Drones Inventory',
                         icon: 'pi pi-fw pi-list',
-                        routerLink: ['/planning/empty']
+                        routerLink: ['management/inventory']
                     }
                 ]
             },
@@ -56,12 +56,12 @@ export class AppMenu {
                     {
                         label: 'All Flights',
                         icon: 'pi pi-fw pi-history',
-                        routerLink: ['/planning/empty']
+                        routerLink: ['/reports/all-flights']
                     },
                     {
                         label: 'Survey Summaries',
                         icon: 'pi pi-fw pi-file',
-                        routerLink: ['/planning/empty']
+                        routerLink: ['/reports/survey-summaries']
                     },
                 ]
             },
