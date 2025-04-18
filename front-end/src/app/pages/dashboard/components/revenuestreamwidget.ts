@@ -8,7 +8,7 @@ import { LayoutService } from '../../../layout/service/layout.service';
     selector: 'app-revenue-stream-widget',
     imports: [ChartModule],
     template: `<div class="card !mb-8">
-        <div class="font-semibold text-xl mb-4">Revenue Stream</div>
+        <div class="font-semibold text-xl mb-4">Overall Performance</div>
         <p-chart type="bar" [data]="chartData" [options]="chartOptions" class="h-80" />
     </div>`
 })
@@ -40,23 +40,23 @@ export class RevenueStreamWidget {
             datasets: [
                 {
                     type: 'bar',
-                    label: 'Subscriptions',
+                    label: 'Total Drones',
                     backgroundColor: documentStyle.getPropertyValue('--p-primary-400'),
-                    data: [4000, 10000, 15000, 4000],
+                    data: [100, 230, 300, 350],
                     barThickness: 32
                 },
                 {
                     type: 'bar',
-                    label: 'Advertising',
+                    label: 'On field',
                     backgroundColor: documentStyle.getPropertyValue('--p-primary-300'),
-                    data: [2100, 8400, 2400, 7500],
+                    data: [90, 190, 266, 330],
                     barThickness: 32
                 },
                 {
                     type: 'bar',
-                    label: 'Affiliate',
+                    label: 'Need Approval',
                     backgroundColor: documentStyle.getPropertyValue('--p-primary-200'),
-                    data: [4100, 5200, 3400, 7400],
+                    data: [30, 78, 130, 190],
                     borderRadius: {
                         topLeft: 8,
                         topRight: 8,

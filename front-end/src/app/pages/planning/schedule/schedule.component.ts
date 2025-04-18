@@ -1,9 +1,11 @@
 import { Component, inject, OnInit, Renderer2, RendererFactory2 } from '@angular/core';
-import { View } from '@syncfusion/ej2-angular-schedule';
+import { AgendaService, DayService, MonthAgendaService, MonthService, ScheduleModule, TimelineMonthService, TimelineViewsService, View, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
 
 @Component({
   selector: 'app-schedule',
-  standalone: false,
+  standalone: true,
+  imports: [ScheduleModule],
+  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService, TimelineViewsService, TimelineMonthService],
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss']
 })

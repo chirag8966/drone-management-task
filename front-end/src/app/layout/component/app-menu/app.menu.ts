@@ -26,7 +26,7 @@ export class AppMenu {
                 items: [
                     {
                         label: 'Missions',
-                        icon: 'pi pi-fw pi-map',
+                        icon: 'pi pi-fw pi-cog',
                         routerLink: ['/planning/missions']
                     },
                     {
@@ -45,6 +45,11 @@ export class AppMenu {
                         label: 'Drones Inventory',
                         icon: 'pi pi-fw pi-list',
                         routerLink: ['management/inventory']
+                    },
+                    {
+                        label: 'On Field',
+                        icon: 'pi pi-fw pi-map',
+                        routerLink: ['management/field']
                     }
                 ]
             },
