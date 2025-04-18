@@ -1,39 +1,52 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Renderer2, RendererFactory2 } from '@angular/core';
+import { View } from '@syncfusion/ej2-angular-schedule';
 
 @Component({
   selector: 'app-schedule',
   standalone: false,
   templateUrl: './schedule.component.html',
-  styleUrl: './schedule.component.scss'
+  styleUrls: ['./schedule.component.scss']
 })
-export class ScheduleComponent implements OnInit   {
+export class ScheduleComponent implements OnInit {
   isStylesLoaded = false;
-
-  constructor(@Inject(DOCUMENT) private document: Document) {}
-
+  private rendererFactory = inject(RendererFactory2);
+  private renderer: Renderer2 = this.rendererFactory.createRenderer(null, null);
+  public selectedDate: Date = new Date();
+  public currentView: View = 'Month';
 
   ngOnInit(): void {
-    this.loadStyle('syncfusion');
+    this.loadSyncfusionStyles();
   }
 
-  loadStyle(styleName: string) {
-    const head = this.document.getElementsByTagName('head')[0];
-    let themeLink = this.document.getElementById(
-      'client-theme'
-    ) as HTMLLinkElement;
-    if (themeLink) {
-      themeLink.href = `src/${styleName}.css`;
-    } else {
-      const style = this.document.createElement('link');
-      style.id = 'client-theme';
-      style.rel = 'stylesheet';
-      style.href = `src/${styleName}.css`;
-      style.type = 'text/css';
-      head.appendChild(style);
-    }
-    setTimeout(() => {
+  private loadSyncfusionStyles(): void {
+    const linkId = 'syncfusion-theme';
+    
+    // Check if already loaded
+    if (document.getElementById(linkId)) {
       this.isStylesLoaded = true;
-    }, 500);
+      return;
+    }
+
+    // Create link element using Angular's Renderer2
+    const link = this.renderer.createElement('link');
+    this.renderer.setAttribute(link, 'id', linkId);
+    this.renderer.setAttribute(link, 'rel', 'stylesheet');
+    this.renderer.setAttribute(link, 'href', 'syncfusion.css');
+    this.renderer.setAttribute(link, 'type', 'text/css');
+    
+    // Listen for load event to set isStylesLoaded
+    this.renderer.listen(link, 'load', () => {
+      this.isStylesLoaded = true;
+    });
+    
+    // Append to head
+    this.renderer.appendChild(document.head, link);
+    
+    // Fallback timeout in case the load event doesn't fire
+    if (!this.isStylesLoaded) {
+    setTimeout(() => {
+        this.isStylesLoaded = true;
+      }, 1000);
+    }
   }
 }
