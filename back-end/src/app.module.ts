@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StatsModule } from './stats/stats.module';
+import { DronesModule } from './drones/drones.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { StatsModule } from './stats/stats.module';
         synchronize: true, // TODO: turn off in production
       })
     }),
-    StatsModule
+    StatsModule,
+    DronesModule
   ],
   controllers: [AppController],
   providers: [AppService],

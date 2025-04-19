@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 // Define the StatWidget interface here to avoid circular imports
 export interface StatWidget {
@@ -17,7 +18,7 @@ export interface StatWidget {
 })
 export class StatsService {
   // Hardcode base URL for now, will be dynamic in production
-  private apiUrl = 'http://localhost:3000/api/stats';
+  private apiUrl = `${environment.apiAddress}/api/stats`;
 
   constructor(private http: HttpClient) { }
 

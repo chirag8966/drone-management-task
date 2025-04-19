@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { StatsService, StatWidget } from '../../../../services/stats.service';
 
 @Component({
@@ -11,44 +11,43 @@ import { StatsService, StatWidget } from '../../../../services/stats.service';
 })
 export class StatsWidget implements OnInit {
     statsWidgets: StatWidget[] = [];
+    statsService =  inject(StatsService)
     
     // Default fallback data in case API fails
     private defaultStatsWidgets: StatWidget[] = [
         {
             name: 'Total Drones',
-            count: 350,
+            count: 0,
             icon: 'pi pi-sort-alt-slash',
             color: 'cyan',
-            highlight: '24 new',
-            description: 'since last week'
+            highlight: '',
+            description: ''
         },
         {
             name: 'On field',
-            count: 263,
+            count: 0,
             icon: 'pi pi-map-marker',
             color: 'green',
-            highlight: '%20+',
-            description: 'since last week'
+            highlight: '',
+            description: ''
         },
         {
             name: 'Need Approval',
-            count: 13,
+            count: 0,
             icon: 'pi pi-check-square',
             color: 'blue',
-            highlight: '3',
-            description: 'new missions added'
+            highlight: '',
+            description: ''
         },
         {
             name: 'Service Required',
-            count: 12,
+            count: 0,
             icon: 'pi pi-wrench',
             color: 'orange',
-            highlight: '3',
-            description: 'Critical'
+            highlight: '',
+            description: ''
         }
     ];
-
-    constructor(private statsService: StatsService) {}
 
     ngOnInit(): void {
         this.loadStats();
