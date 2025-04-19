@@ -18,8 +18,8 @@ export class DronesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dronesService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return [await this.dronesService.findOne(+id)];
   }
 
   @Patch(':id')

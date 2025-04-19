@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class="alert alert-info" *ngIf="fieldId">
-            Currently viewing field with ID: <strong>{{ fieldId }}</strong>
+            <app-recent-missions [id]="fieldId" />
         </div>
         <div class="alert alert-warning" *ngIf="!fieldId">
             No field ID provided in query parameters

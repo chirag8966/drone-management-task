@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RecentMissions } from '../../dashboard/components/recent-missions';
 
 @Component({
   selector: 'app-field',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RecentMissions],
   templateUrl: './field.component.html',
   styleUrls: ['./field.component.scss']
 })

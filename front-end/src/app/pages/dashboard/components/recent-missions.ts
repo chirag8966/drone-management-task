@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -11,13 +11,13 @@ import { DronesService, Drone } from '../../../services/drones.service';
     selector: 'app-recent-missions',
     imports: [CommonModule, TableModule, ButtonModule, RippleModule],
     template: `<div class="card !mb-8">
-        <div class="font-semibold text-xl mb-4">Recent Missions</div>
-        <p-table [value]="products" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+        <div class="font-semibold text-xl mb-4">{{ title }}</div>
+        <p-table [value]="products" [paginator]="true" [rows]="rows" responsiveLayout="scroll">
             <ng-template #header>
                 <tr>
                     <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
                     <th pSortableColumn="location">Location <p-sortIcon field="location"></p-sortIcon></th>
-                    <th pSortableColumn="price">Battery <p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="battery">Battery <p-sortIcon field="battery"></p-sortIcon></th>
                     <th>View</th>
                 </tr>
             </ng-template>
@@ -42,6 +42,9 @@ import { DronesService, Drone } from '../../../services/drones.service';
     </div>`,
 })
 export class RecentMissions implements OnInit {
+    @Input() rows: number = 5;
+    @Input() title: string = 'Recent Missions';
+    @Input() id: string | null = null;
     products: {id: string, name: string, location: string, battery: number}[] = [];
     router = inject(Router)
     dronesService = inject(DronesService)
@@ -60,8 +63,11 @@ export class RecentMissions implements OnInit {
     fetchDrones(): void {
         this.loading = true;
         this.error = null;
-        
-        this.dronesService.getDrones().subscribe({
+        let service = this.dronesService.getDrones();
+        if(this.id) {
+            service = this.dronesService.getDroneById(this.id);
+        }
+        service.subscribe({
             next: (drones) => {
                 // Map drone data to the format expected by the table
                 this.products = this.mapDronesToProducts(drones);

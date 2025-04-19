@@ -33,7 +33,7 @@ export class DronesService {
    * @param id Drone ID
    * @returns Observable with Drone data
    */
-  getDrone(id: number): Observable<Drone> {
-    return this.http.get<Drone>(`${this.apiUrl}/${id}`);
+  getDroneById(id: string): Observable<Drone[]> {
+    return this.http.get<Drone[]>(`${this.apiUrl}/${id}`);
   }
 }
