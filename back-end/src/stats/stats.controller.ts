@@ -18,13 +18,13 @@ export class StatsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.statsService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.statsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStatDto: UpdateStatDto) {
-    return this.statsService.update(+id, updateStatDto);
+  update(@Param('id') id: number, @Body() updateStatDto: UpdateStatDto) {
+    return this.statsService.update(id, updateStatDto);
   }
 
   @Delete(':id')

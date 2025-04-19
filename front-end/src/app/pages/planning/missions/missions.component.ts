@@ -1,10 +1,24 @@
 import { Component } from '@angular/core';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-missions',
   standalone: true,
-  imports: [GoogleMapComponent],
+  imports: [
+    GoogleMapComponent, 
+    CommonModule,
+    FormsModule,
+    InputTextModule,
+    DropdownModule,
+    CheckboxModule,
+    ButtonModule
+  ],
   templateUrl: './missions.component.html',
   styleUrls: ['./missions.component.scss']
 })
